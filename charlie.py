@@ -17,7 +17,6 @@ from AES256 import *
 # TODO: FALTA A VALIDAÇÃO ENTRE UTILIZADORES
 
 class Client:
-
     def __init__(self, HOST, PORT):
         
         self.key= rsa.generate_private_key(
@@ -25,21 +24,17 @@ class Client:
         key_size=2048,
     )
         self.name = input("Enter your name: ")
-        print("Generating pair of keys...")
-
         with open("keys/"+self.name+"_privkey.pem","wb") as f: 
             f.write(self.key.private_bytes(
                 encoding =serialization.Encoding.PEM,
                 format=serialization.PrivateFormat.TraditionalOpenSSL,
                 encryption_algorithm= serialization.BestAvailableEncryption(b"passphrase"),
         ))
-        print("Keys generated!")
+        
+        self.socket = socket.socket()
+        self.socket.connect((HOST, PORT))
 
-        self.aes = AES256()  
-        self.socket = socket.socket()    
-        self.socket.connect((HOST, PORT))   
         self.talk_to_server()
-
 
     def talk_to_server(self):
         self.socket.send(self.name.encode())
@@ -48,32 +43,17 @@ class Client:
 
     def send_message(self):
         while True:
-            client_input = input("") 
-            client_input= self.aes.encrypt_AES256(client_input)
-            #print(client_input)
-
-            self.socket.send((self.name+":"+client_input.hex()).encode())
+            client_input = input("")
+            client_message = self.name + ": " + client_input
+            self.socket.send(client_message.encode())
 
     def receive_message(self):
         while True:
-            server_message = self.socket.recv(1024).decode() 
-            #server_message = self.aes.decrypt_AES(server_message)
-            #print(server_message)
-            if ":" in server_message:
-                name = server_message.split(":")[0]
-                encrypted_message_hex = server_message.split(":")[1]
-                encrypted_message = bytes.fromhex(encrypted_message_hex)
-                #print(encrypted_message)
-                decrypt_message = self.aes.decrypt_AES(encrypted_message) #decifra a mensagem mandada 
-            else:
-                name=""
-                decrypt_message=""
-
+            server_message = self.socket.recv(1024).decode()
             if not server_message.strip():
                 os._exit(0)
-            print("\033[1;31;40m" + name +":"+decrypt_message + "\033[0m")
+            print("\033[1;31;40m" + server_message + "\033[0m")
 
 
 if __name__ == "__main__":
     Client('localhost', 12345)
-    
