@@ -12,8 +12,8 @@ class AES256:
         self.iv = b'\x00' * 16
 
     def encrypt_AES256(self,message):
-        print(self.key)
-        print(self.iv)
+        #print(self.key)
+        #print(self.iv)
         message = message.encode('utf-8')
         
        
@@ -29,8 +29,8 @@ class AES256:
         return ciphertext
 
     def decrypt_AES(self,ciphertext):
-        print(self.key)
-        print(self.iv)
+        #print(self.key)
+        #print(self.iv)
         cipher = Cipher(algorithms.AES(self.key), modes.CBC(self.iv))
         decryptor = cipher.decryptor()
         plaintext = decryptor.update(ciphertext) + decryptor.finalize()

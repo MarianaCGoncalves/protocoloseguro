@@ -5,16 +5,14 @@ import os
 import datetime
 from pathlib import Path
 from cryptography.hazmat.primitives import serialization, hashes
-from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography import x509
 from cryptography.x509.oid import NameOID
 import cryptography
-from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from AES256 import *
 
-# TODO: FALTA A VALIDAÇÃO ENTRE UTILIZADORES
 
 class Client:
     def __init__(self, HOST, PORT):

@@ -5,4 +5,3 @@ https://github.com/pontocom/pyChatServer/tree/master
 quando os utilizadores pretnedem mandar mensagens entre si, terao que pedir ao gateway um certificado para verificar a sua identidade.
 o gateway ao receber o pedido, criara um certificado para cada um e manda para cada um.
 
-

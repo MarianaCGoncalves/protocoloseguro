@@ -67,10 +67,18 @@ class Server:
             ])).sign(user_key, hashes.SHA256())
 
             # Sign the CSR with the CA's private key to create the user's certificate
-            ca_key = rsa.generate_private_key(
-                public_exponent=65537,
-                key_size=4096
-            )
+
+            #ca_key = rsa.generate_private_key(
+                #public_exponent=65537,
+                #key_size=4096
+            #)
+
+            with open ("keys/gateway_key.pem", "rb") as gateway_key:
+                ca_key = serialization.load_pem_private_key(
+                    gateway_key.read(),
+                    password=b"passphrase",
+                    backend=default_backend()
+                )
 
             ca_cert = x509.CertificateBuilder().subject_name(
                 x509.Name([
