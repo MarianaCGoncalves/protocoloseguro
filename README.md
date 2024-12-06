@@ -1,5 +1,5 @@
 # Protocolo Seguro
-Proposto pelo docente de Segurança em Redes e Sistemas de Informação. 
+Proposto pelo docente de Segurança em Redes e Sistemas de Informação. Nas atividades 1 e 2 temos uma entidade Daniel, mas não a utilizamos porque o código será o mesmo para cada cliente.
 
 ### Entidades
 Para simular este protocolo vamos usar 4 entidades: 
@@ -26,6 +26,10 @@ Execute estes comandos em terminais diferentes:
 Quando os clientes entram no gateway, automaticamente geram as suas chaves, e o gateway gera certificado para cada entidade. Antes da sua comunicação cada entidade valida o certificado com quem vai comunicar.
 Neste caso observamos a validação entre o Bob e a Alice:
 ![image](https://github.com/user-attachments/assets/c66d6b4b-8663-4ffa-a14f-dc166be1469e)
+
+Validação entre Alice, Bob e Charlie.
+![image](https://github.com/user-attachments/assets/f18331dd-6283-4159-8c36-2a7a9f69462f)
+
 
 ### Diagrama da Autenticação
 ![image](https://github.com/user-attachments/assets/0710338b-0ec2-4638-b929-f3cc8afaedf5)
